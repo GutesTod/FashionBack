@@ -4,7 +4,7 @@ from sqlalchemy.orm import relationship
 
 class User(OrmBase):
     __tablename__ = 'Users'
-    user_id = Column(Integer, primary_key=True)
+    id = Column(Integer, primary_key=True)
     username = Column(String, nullable=False)
 
     salons = relationship('Salons', back_populates='owner')

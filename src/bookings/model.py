@@ -5,9 +5,9 @@ from ..base import OrmBase
 
 class Booking(OrmBase):
     __tablename__ = 'Bookings'
-    booking_id = Column(Integer, primary_key=True)
-    user_id = Column(Integer, ForeignKey('Users.user_id'))
-    service_id = Column(Integer, ForeignKey('Services.service_id'))
+    id = Column(Integer, primary_key=True)
+    user_id = Column(Integer, ForeignKey('Users.id'))
+    service_id = Column(Integer, ForeignKey('Services.id'))
     booking_date = Column(DateTime)
     status = Column(String(50))
 

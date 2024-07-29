@@ -3,8 +3,10 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from config.settings import Base
 from fastapi import HTTPException
 from sqlalchemy.future import select
-from sqlalchemy import update, delete
+from sqlalchemy import update, delete, create_engine
+from sqlalchemy.orm import sessionmaker
 
+from ..config import settings
 
 ModelType = TypeVar("ModelType", bound=Base)
 
@@ -54,3 +56,11 @@ class BaseService(Generic[ModelType]):
             )
             await session.commit()
         return None
+
+
+engine = create_engine(settings.POSTGRES_URL)
+
+
+async def get_session():
+    session = sessionmaker(engine, expire_on_commit=False)
+    return session

@@ -7,8 +7,8 @@ from ..base import OrmBase
 
 class Notification(OrmBase):
     __tablename__ = 'Notifications'
-    notification_id = Column(Integer, primary_key=True)
-    user_id = Column(Integer, ForeignKey('Users.user_id'))
+    id = Column(Integer, primary_key=True)
+    user_id = Column(Integer, ForeignKey('Users.id'))
     message = Column(Text)
     sent_at = Column(DateTime, default=datetime.now)
     is_read = Column(Boolean, default=False)

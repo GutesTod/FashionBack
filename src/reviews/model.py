@@ -7,8 +7,8 @@ from ..base import OrmBase
 
 class Review(OrmBase):
     __tablename__ = 'Reviews'
-    review_id = Column(Integer, primary_key=True)
-    booking_id = Column(Integer, ForeignKey('Bookings.booking_id'))
+    id = Column(Integer, primary_key=True)
+    booking_id = Column(Integer, ForeignKey('Bookings.id'))
     rating = Column(Integer)
     comment = Column(Text)
     reviewed_at = Column(DateTime, default=datetime.now)

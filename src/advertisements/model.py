@@ -7,8 +7,8 @@ from datetime import datetime
 
 class Advertisement(OrmBase):
     __tablename__ = 'Advertisements'
-    ad_id = Column(Integer, primary_key=True)
-    service_id = Column(Integer, ForeignKey('Services.service_id'))
+    id = Column(Integer, primary_key=True)
+    service_id = Column(Integer, ForeignKey('Services.id'))
     title = Column(String(255), nullable=False)
     description = Column(Text)
     photos = Column(JSON)
