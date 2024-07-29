@@ -1,7 +1,7 @@
 from sqlalchemy import Column, Integer, String, ForeignKey, DECIMAL, Enum, Text
 from sqlalchemy.orm import relationship
 
-from ..base_classes import OrmBase
+from ..base import OrmBase
 
 class Service(OrmBase):
     __tablename__ = 'Services'

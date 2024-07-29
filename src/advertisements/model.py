@@ -1,7 +1,7 @@
 from sqlalchemy import Column, Integer, String, ForeignKey, Text, DateTime, JSON, Boolean
 from sqlalchemy.orm import relationship
 
-from ..base_classes import OrmBase
+from ..base import OrmBase
 
 from datetime import datetime
 

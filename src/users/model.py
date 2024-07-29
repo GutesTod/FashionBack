@@ -1,4 +1,4 @@
-from ..base_classes import OrmBase
+from ..base import OrmBase
 from sqlalchemy import Column, Integer, String
 from sqlalchemy.orm import relationship
 

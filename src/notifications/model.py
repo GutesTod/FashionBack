@@ -3,7 +3,7 @@ from sqlalchemy.orm import relationship
 
 from datetime import datetime
 
-from ..base_classes import OrmBase
+from ..base import OrmBase
 
 class Notification(OrmBase):
     __tablename__ = 'Notifications'

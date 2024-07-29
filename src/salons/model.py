@@ -1,7 +1,7 @@
 from sqlalchemy import Column, Integer, String, ForeignKey, Date
 from sqlalchemy.orm import relationship
 
-from ..base_classes import OrmBase
+from ..base import OrmBase
 
 class Salon(OrmBase):
     __tablename__ = 'Salons'

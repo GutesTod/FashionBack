@@ -1,7 +1,7 @@
 from sqlalchemy import Column, Integer, String, ForeignKey, DateTime
 from sqlalchemy.orm import relationship
 
-from ..base_classes import OrmBase
+from ..base import OrmBase
 
 class Booking(OrmBase):
     __tablename__ = 'Bookings'
