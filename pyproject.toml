@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "fashionback"
+version = "0.1.0"
+description = ""
+authors = ["Matvey <jefflol003@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+psycopg2-binary = "^2.9.9"
+pydantic-settings = "^2.3.4"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
