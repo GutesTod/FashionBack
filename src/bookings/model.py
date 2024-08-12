@@ -5,12 +5,11 @@ from ..base import OrmBase
 
 class Booking(OrmBase):
     __tablename__ = 'Bookings'
-    id = Column(Integer, primary_key=True)
-    user_id = Column(Integer, ForeignKey('Users.id'))
-    service_id = Column(Integer, ForeignKey('Services.id'))
-    booking_date = Column(DateTime)
-    status = Column(String(50))
+    booking_id = Column(Integer, primary_key=True)
+    user_id = Column(Integer, ForeignKey('Users.user_id'))
+    ad_id = Column(Integer, ForeignKey('Advertisements.ad_id'))
+    datetime = Column(DateTime)
+    status = Column(String)
 
     user = relationship('Users', back_populates='bookings')
-    service = relationship('Services', back_populates='bookings')
-    review = relationship('Reviews', back_populates='booking')
+    advertisement = relationship('Advertisements', back_populates='bookings')
