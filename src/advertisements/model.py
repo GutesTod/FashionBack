@@ -3,8 +3,6 @@ from sqlalchemy.orm import relationship
 
 from ..base import OrmBase
 
-from datetime import datetime
-
 class Advertisement(OrmBase):
     __tablename__ = 'Advertisements'
     ad_id = Column(Integer, primary_key=True)

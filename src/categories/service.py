@@ -1,12 +1,12 @@
 from fastapi import Depends
 from ..base import BaseService, get_session
 from sqlalchemy.orm import Session
-from .model import User
+from .model import Category
 
 
-class CategoryService(BaseService[User]):
+class CategoryService(BaseService[Category]):
     def __init__(self, db_session: Session):
-        super(CategoryService, self).__init__(User, db_session)
+        super(CategoryService, self).__init__(Category, db_session)
 
 
 def get_category_service(

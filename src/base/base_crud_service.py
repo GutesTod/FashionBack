@@ -40,11 +40,12 @@ class BaseService(Generic[ModelType]):
             await session.commit()
         return item
 
-    async def update(self, data):
+    async def update(self, data, id):
         async with self.db_session as session:
             await session.execute(
-                update(self.table),
-                [data.dict()],
+                update(self.table).
+                filter(self.table.id == id).
+                values(**data)
             )
             await session.commit()
         return await self.get_one(data.id)

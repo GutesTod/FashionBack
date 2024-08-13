@@ -3,11 +3,11 @@ from fastapi import APIRouter, Depends
 from .schema import CategoryBase, CategoryCreate
 from .service import CategoryService, get_category_service
 
-from typing import Optional
+from typing import Optional, List
 
 category_router = APIRouter(prefix="/api/v1/categories", tags=["Категории"])
 
-@category_router.get("/{limit}", response_model=CategoryBase)
+@category_router.get("/{limit}", response_model=List[CategoryBase])
 async def get_categories(
     limit: Optional[int], 
     service: CategoryService = Depends(get_category_service)
@@ -27,4 +27,4 @@ async def delete_category(
     category_id: int, 
     service: CategoryService = Depends(get_category_service)
 ):
-    return service.create(category_id)
+    return service.delete(category_id)
