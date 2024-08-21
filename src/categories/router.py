@@ -12,14 +12,14 @@ async def get_categories(
     limit: Optional[int], 
     service: CategoryService = Depends(get_category_service)
 ):
-    return service.get_list(limit)
+    return await service.get_list(limit)
 
 @category_router.post("/", response_model=CategoryBase)
 async def post_category(
     category: CategoryCreate, 
     service: CategoryService = Depends(get_category_service)
 ):
-    return service.create(category)
+    return await service.create(category)
 
 
 @category_router.delete("/{category_id}", response_model=CategoryBase)
@@ -27,4 +27,4 @@ async def delete_category(
     category_id: int, 
     service: CategoryService = Depends(get_category_service)
 ):
-    return service.delete(category_id)
+    return await service.delete(category_id)

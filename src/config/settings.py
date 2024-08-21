@@ -2,7 +2,6 @@ from pydantic_settings import BaseSettings
 
 class SettingsBack(BaseSettings):
     POSTGRES_URL: str
-    CLICKHOUSE_URL: str
 
     class Config:
         env_file = "././.env"

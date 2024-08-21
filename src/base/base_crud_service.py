@@ -1,14 +1,11 @@
 from typing import Generic, Type, TypeVar, Optional
 from sqlalchemy.ext.asyncio import AsyncSession
-from config.settings import Base
+from .base_model import OrmBase
 from fastapi import HTTPException
 from sqlalchemy.future import select
-from sqlalchemy import update, delete, create_engine
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy import update, delete
 
-from ..config import settings
-
-ModelType = TypeVar("ModelType", bound=Base)
+ModelType = TypeVar("ModelType", bound=OrmBase)
 
 
 class BaseService(Generic[ModelType]):
@@ -17,51 +14,38 @@ class BaseService(Generic[ModelType]):
         self.db_session = db_session
 
     async def get_list(self, limit: Optional[int] = None):
-        async with self.db_session as session:
-            query = await session.execute(
-                select(self.table).limit(limit).order_by(-self.table.id.desc())
-            )
-            return query.scalars().all()
+        query = await self.db_session.execute(
+            select(self.table).limit(limit).order_by(-self.table.id.desc())
+        )
+        return query.scalars().all()
 
     async def get_one(self, id):
-        async with self.db_session as session:
-            id_item = await session.execute(
-                select(self.table).filter(self.table.id == id)
-            )
-            id_item = id_item.scalar()
+        id_item = await self.db_session.execute(
+            select(self.table).filter(self.table.id == id)
+        )
+        id_item = id_item.scalar()
         if not id_item:
             raise HTTPException(status_code=404, detail="Page is not found")
         return id_item
 
     async def create(self, data):
-        async with self.db_session as session:
-            item = self.table(**data.dict())
-            session.add(item)
-            await session.commit()
+        item = self.table(**data.dict())
+        self.db_session.add(item)
+        await self.db_session.commit()
         return item
 
     async def update(self, data, id):
-        async with self.db_session as session:
-            await session.execute(
-                update(self.table).
-                filter(self.table.id == id).
-                values(**data)
-            )
-            await session.commit()
+        await self.db_session.execute(
+            update(self.table).
+            filter(self.table.id == id).
+            values(**data)
+        )
+        await self.db_session.commit()
         return await self.get_one(data.id)
 
     async def delete(self, id):
-        async with self.db_session as session:
-            await session.execute(
-                delete(self.table).filter(self.table.id == id)
-            )
-            await session.commit()
+        await self.db_session.execute(
+            delete(self.table).filter(self.table.id == id)
+        )
+        await self.db_session.commit()
         return None
-
-
-engine = create_engine(settings.POSTGRES_URL)
-
-
-async def get_session():
-    session = sessionmaker(engine, expire_on_commit=False)
-    return session

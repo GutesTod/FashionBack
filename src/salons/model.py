@@ -1,15 +1,15 @@
-from sqlalchemy import Column, Integer, String, Text
+from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship
 
 from ..base import OrmBase
 
+from ..users.model import User
+
 class Salon(OrmBase):
-    __tablename__ = 'Salons'
-    salon_id = Column(Integer, primary_key=True)
-    name = Column(String)
-    contact_info = Column(Text)
+    __tablename__ = 'salons'
+    id = Column(Integer, primary_key=True, index=True)
+    name = Column(String, index=True)
     address = Column(String)
-    payment_info = Column(Text)
-    
-    advertisements = relationship('Advertisements', back_populates='salon')
-    payments = relationship('Payments', back_populates='salon')
+    contact_info = Column(String)
+    user_id = Column(Integer, ForeignKey('users.id'))
+    user = relationship('User', backref='salons')

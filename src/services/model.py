@@ -1,14 +1,17 @@
-from sqlalchemy import Column, Integer, String, ForeignKey, DECIMAL, Enum, Text
+from sqlalchemy import Column, Integer, String, DECIMAL, ForeignKey
 from sqlalchemy.orm import relationship
 
 from ..base import OrmBase
 
+from ..salons.model import Salon
+
 class Service(OrmBase):
     __tablename__ = 'services'
-    service_id = Column(Integer, primary_key=True)
-    category_id = Column(Integer, ForeignKey('categories.category_id'))
-    name = Column(String)
-    description = Column(Text)
-    
-    category = relationship('Categories', back_populates='services')
-    advertisements = relationship('Advertisements', back_populates='service')
+    id = Column(Integer, primary_key=True, index=True)
+    name = Column(String, index=True)
+    description = Column(String)
+    price = Column(DECIMAL)
+    salon_id = Column(Integer, ForeignKey('salons.id'))
+    salon = relationship('Salon', backref='services')
+    category_id = Column(Integer, ForeignKey('categories.id'))
+    category = relationship('Category', backref='services')
