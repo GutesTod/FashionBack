@@ -16,6 +16,7 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(lifespan=lifespan)
 
+app.include_router(advertisement_router)
 app.include_router(category_router)
 
 print(settings.POSTGRES_URL)
