@@ -1,9 +1,17 @@
-from sqlalchemy import Column, Integer, String, DECIMAL, ForeignKey
+from sqlalchemy import Column, Integer, String, DECIMAL, ForeignKey, Enum as SQLEnum
 from sqlalchemy.orm import relationship
 
 from ..base import OrmBase
 
 from ..salons.model import Salon
+
+from enum import Enum
+
+class ServiceLocation(Enum):
+    AT_HOME = 'at_home'
+    IN_SALON = 'in_salon'
+    WITH_DEPARTURE = 'with_departure'
+    ALL = 'all'
 
 class Service(OrmBase):
     __tablename__ = 'services'
@@ -15,3 +23,4 @@ class Service(OrmBase):
     salon = relationship('Salon', backref='services')
     category_id = Column(Integer, ForeignKey('categories.id'))
     category = relationship('Category', backref='services')
+    service_location = Column(SQLEnum(ServiceLocation), nullable=False)

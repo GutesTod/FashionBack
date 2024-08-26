@@ -11,3 +11,6 @@ class CategoryCreate(CategoryBase):
 
 class CategoryUpdate(CategoryBase):
     pass
+
+class CategoryResponse(CategoryBase):
+    id: int

@@ -4,6 +4,7 @@ from logging.config import fileConfig
 from typing import Any
 
 from alembic.runtime.environment import EnvironmentContext
+import alembic_postgresql_enum
 from sqlalchemy import pool
 from sqlalchemy.engine import Connection
 from sqlalchemy.ext.asyncio import async_engine_from_config

@@ -12,6 +12,8 @@ python-dotenv = "^1.0.1"
 sqlalchemy-utils = "^0.41.2"
 asyncpg = "^0.29.0"
 alembic = "^1.13.2"
+psycopg = {extras = ["binary"], version = "^3.2.1"}
+alembic-postgresql-enum = "^1.3.0"
 
 
 [build-system]
