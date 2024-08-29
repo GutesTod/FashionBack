@@ -9,7 +9,7 @@ class UserService(BaseService[User]):
         super(UserService, self).__init__(User, db_session)
 
 
-def get_users_service(
+def get_user_service(
     db_session: Session = Depends(get_session),
 ) -> UserService:
     return UserService(db_session)

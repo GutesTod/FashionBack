@@ -44,8 +44,8 @@ class BaseService(Generic[ModelType]):
         return await self.get_one(data.id)
 
     async def delete(self, id):
-        await self.db_session.execute(
+        query = await self.db_session.execute(
             delete(self.table).filter(self.table.id == id)
         )
         await self.db_session.commit()
-        return None
+        return query.all()

@@ -4,6 +4,7 @@ from contextlib import asynccontextmanager
 from src.advertisements import advertisement_router
 from src.categories import category_router
 from src.services import service_router
+from src.users import user_router
 
 from src.base import db_manager
 
@@ -20,5 +21,6 @@ app = FastAPI(lifespan=lifespan)
 app.include_router(advertisement_router)
 app.include_router(category_router)
 app.include_router(service_router)
+app.include_router(user_router)
 
 print(settings.POSTGRES_URL)

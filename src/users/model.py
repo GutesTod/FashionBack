@@ -7,4 +7,3 @@ class User(OrmBase):
     username = Column(String, unique=True, index=True)
     role = Column(String)  # 'client', 'admin', 'salon_admin'
     contact_info = Column(String)
-    telegram_id = Column(Integer, unique=True, index=True)

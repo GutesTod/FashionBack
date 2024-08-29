@@ -27,4 +27,5 @@ async def delete_category(
     category_id: int, 
     service: CategoryService = Depends(get_category_service)
 ):
-    return await service.delete(category_id)
+    await service.delete(category_id)
+    return {'id': category_id}
